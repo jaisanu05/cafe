@@ -1,33 +1,35 @@
 pipeline {
     agent any
-
     stages {
-        stage('Delete Container & Image') {
+        stage('Step 1') {
             steps {
                 sh '''
-                if [ "$(docker ps -aq -f name=cafe-box)" ];then
-                docker stop cafe-box
-                docker rm cafe-box
+                if [ "$(docker ps -aq -f name=cafe-box)" ]; then
+                    docker stop cafe-box cafe-box2
+                    docker rm cafe-box cafe-box2
                 fi
-                if ["$(docker images -q -f reference=cafe-img)" ];then
-                docker rmi cafe-img
+
+                # Check if image 'cafe-img' exists
+                if [ "$(docker images -q -f reference=cafe-img)" ]; then
+                    docker rmi cafe-img
                 fi
                 '''
             }
         }
-         stage('Build Image') {
+        stage('Image Build') {
             steps {
                 sh '''
                 docker build -t cafe-img .
                 '''
             }
         }
-         stage('Create Container') {
+        stage('Create Container') {
             steps {
                 sh '''
-                docker run --name cafe-box -p 8081:80 cafe-img
+                docker run --name cafe-box -p 8081:80 -d cafe-img
+				docker run --name cafe-box2 -p 8082:80 -d cafe-img
                 '''
             }
         }
     }
-}
+} 
