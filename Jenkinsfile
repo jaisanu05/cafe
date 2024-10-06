@@ -5,11 +5,8 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    # Define the container names
-                    containers=("cafe-box" "cafe-box2" "cafe-box3")
-
                     # Stop and remove existing containers if they exist
-                    for container in "${containers[@]}"; do
+                    for container in cafe-box cafe-box2 cafe-box3; do
                         if [ "$(docker ps -aq -f name=$container)" ]; then
                             docker stop $container
                             docker rm $container
