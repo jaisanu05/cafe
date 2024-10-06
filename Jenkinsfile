@@ -14,7 +14,7 @@ pipeline {
                     done
 
                     # Check if image 'cafe-img' exists and remove it
-                    if [ "$(docker images -q cafe-img 2> /dev/null)" ]; then
+                    if [ "$(docker images -q -f reference=demo-img)" ]; then
                         docker rmi cafe-img
                     fi
                     '''
