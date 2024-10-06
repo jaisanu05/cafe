@@ -5,8 +5,8 @@ pipeline {
             steps {
                 sh '''
                 if [ "$(docker ps -aq -f name=cafe-box)" ]; then
-                    docker stop cafe-box cafe-box2
-                    docker rm cafe-box cafe-box2
+                    docker stop cafe-box 
+                    docker rm cafe-box 
                 fi
 
                 # Check if image 'cafe-img' exists
