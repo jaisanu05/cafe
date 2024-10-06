@@ -4,7 +4,7 @@ pipeline {
         stage('Step 1') {
             steps {
                 sh '''
-                if [ "$(docker ps -aq -f name=cafe-box || cafe-box2 || cafe-box3)" ]; then
+                if [ "$(docker ps -aq -f name=cafe-box -o cafe-box2 -o cafe-box3)" ]; then
                     docker stop cafe-box cafe-box2 cafe-box3
                     docker rm cafe-box cafe-box2 cafe-box3
                 fi
