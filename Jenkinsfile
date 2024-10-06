@@ -5,7 +5,7 @@ pipeline {
             steps {
                 sh '''
 				containers=("cafe-box" "cafe-box2" "cafe-box3")
-                if [ "$(docker ps -aq -f name=$container)" ]; then
+                if [ "$(docker ps -aq -f name=$containers)" ]; then
                     docker stop $container
                     docker rm $container
                 fi
