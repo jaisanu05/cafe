@@ -28,7 +28,7 @@ pipeline {
                 sh '''
                 docker run --name cafe-box -p 8081:80 -d cafe-img
 				docker run --name cafe-box2 -p 8082:80 -d cafe-img
-				docker run --name cafe-box3 -p 8082:80 -d cafe-img
+				docker run --name cafe-box3 -p 8083:80 -d cafe-img
                 '''
             }
         }
